@@ -6,7 +6,7 @@
 //|  Tutti gli orari sono in ORARIO SERVER del broker.               |
 //+------------------------------------------------------------------+
 #property copyright "XAUUSD EA"
-#property version   "1.00"
+#property version   "1.01"
 #property strict
 
 #include <Trade\Trade.mqh>
@@ -40,8 +40,9 @@ input int    InpBreakBufferPts   = 20;    // Buffer oltre il range (punti)
 input double InpMaxChaseATR      = 1.5;   // Non inseguire: max distanza dal range (ATR)
 
 input group "=== Gestione posizione ==="
-input double InpBEFraction       = 0.5;   // Break-even a % del TP raggiunta (0 = off)
-input int    InpBEOffsetPts      = 20;    // Offset break-even (punti)
+input bool   InpUseBreakeven     = true;  // BREAKEVEN: usa break-even (true/false)
+input double InpBEFraction       = 0.5;   // BREAKEVEN: scatta a questa frazione del TP (0.5 = metà TP)
+input int    InpBEOffsetPts      = 20;    // BREAKEVEN: punti oltre l'ingresso dove metto lo SL
 
 CTrade   trade;
 int      hATR = INVALID_HANDLE;
@@ -244,7 +245,7 @@ void ManagePositions()
          continue;
       }
 
-      if(InpBEFraction <= 0) continue;
+      if(!InpUseBreakeven || InpBEFraction <= 0) continue;
       long   type = PositionGetInteger(POSITION_TYPE);
       double open = PositionGetDouble(POSITION_PRICE_OPEN);
       double sl   = PositionGetDouble(POSITION_SL);

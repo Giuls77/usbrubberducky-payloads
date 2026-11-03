@@ -7,7 +7,7 @@ EA per MetaTrader 5 che lavora 24/5 in autonomia su XAUUSD.
 2. **Ingresso** (finestra 08:00–17:00 server, a chiusura di candela M15):
    - BUY se la candela chiude sopra il massimo del range (+ buffer) **e** sopra EMA200 H1.
    - SELL se chiude sotto il minimo (− buffer) **e** sotto EMA200 H1.
-3. **SL** = ATR(14, M15) × 1.2, **TP** = SL × 1.5. Break-even a metà TP.
+3. **SL** = ATR(14, M15) × 1.2, **TP** = SL × 1.5. Break-even a metà TP (attivabile con `Usa break-even` true/false).
 4. Filtri: range né troppo piccolo né troppo grande (in ATR), spread massimo, non inseguire un breakout già esteso, niente weekend.
 5. Max 2 trade/giorno (uno per direzione), stop giornaliero 2% del balance, chiusura forzata alle 21:00 server.
 6. Lotto calcolato sul rischio (0.5% per trade di default) o lotto fisso.
